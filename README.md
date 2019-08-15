@@ -23,3 +23,7 @@ Then run:
 ```  
 python followers.py
 ```
+
+## Ideas for future projects
+- Flask app you can log on to
+- Timer triggered function that checks once per day and notifies of changes
