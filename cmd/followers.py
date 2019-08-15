@@ -8,11 +8,8 @@ from InstagramAPI import InstagramAPI
 def get_followings(api, user_id):
     """Returns list of followings"""
     followings = []
-    next_max_id = True
-    while next_max_id:
-        # first iteration hack
-        if next_max_id is True:
-            next_max_id = ''
+    next_max_id = ''
+    while next_max_id is not None:
         _ = api.getUserFollowings(user_id, maxid=next_max_id)
         followings.extend(api.LastJson.get('users', []))
         next_max_id = api.LastJson.get('next_max_id', '')
@@ -22,11 +19,8 @@ def get_followings(api, user_id):
 def get_followers(api, user_id):
     """Returns list of followers"""
     followers = []
-    next_max_id = True
-    while next_max_id:
-        # first iteration hack
-        if next_max_id is True:
-            next_max_id = ''
+    next_max_id = ''
+    while next_max_id is not None:
         _ = api.getUserFollowers(user_id, maxid=next_max_id)
         followers.extend(api.LastJson.get('users', []))
         next_max_id = api.LastJson.get('next_max_id', '')
@@ -46,6 +40,8 @@ if __name__ == "__main__":
     load_dotenv()
     insta_id = os.environ["INSTA_CLIENT"]
     insta_pswd = os.environ["INSTA_SECRET"]
+
+    # initialize InstagramAPI and login
     api = InstagramAPI(insta_id, insta_pswd)
     api.login()
 
