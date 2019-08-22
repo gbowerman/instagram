@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Instafollow - {{ username }}</title>
+    <link rel="stylesheet" type="text/css" href={{ url_for('static', filename='wfstyle.css')}}>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <h1>Instafollow - {{ username }}</h1>
+
+    Your have {{ numfollowers }} followers<br/>
+    Your are following {{ numfollowings }}
+
+    <br />
+    <h3>People you follow who don't follow you:</h3>
+    <table>
+        {% for username in followings %}
+        <tr>
+            <td> <a href="https://www.instagram.com/{{ username[1] }}">{{ username[0] }}</a> </td><td> {{ username[1] }} </td><td> {{ username[2] }} </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br />
+
+    <h3>Followers you don't follow:</h3>
+    <table>
+        {% for username in followers %}
+        <tr>
+            <td> <a href="https://www.instagram.com/{{ username[1] }}">{{ username[0] }}</a> </td><td> {{ username[1] }} </td><td> {{ username[2] }} </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br /><br />
+    <form>
+        <input type="button" value="Back" onclick="history.back()">
+    </form>
+</body>
+
+</html>

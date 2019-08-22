@@ -1,0 +1,19 @@
+<!doctype html>
+
+<head>
+  <title>Instafollow</title>
+  <link rel="stylesheet" type="text/css"href={{ url_for('static', filename='wfstyle.css')}}>
+  <meta name="viewport" content="width=device-width, initial-scale=1"> 
+</head>
+
+<body>
+    <h1>Instafollow</h1>
+    <h3>Login</h3>
+    <form method="post" action="/login">
+      Username: <input type="text" name="username" size="12">
+      Password: <input type="password" name="pw" pattern=".{6,}" size="10">
+      <button type="submit" value="Analyze">Find</button>
+    </form>
+</body>
+
+</html>
