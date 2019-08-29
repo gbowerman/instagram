@@ -38,19 +38,6 @@ def list_to_pkdict(personlist):
         }
 
 
-def initapp():
-    # initialize on first run
-    global global_init_flag
-    # initialization complete - set global status
-    global_init_flag = True
-
-
-@app.before_request
-def check_for_init():
-    if global_init_flag == False:
-        initapp()
-
-
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -65,7 +52,7 @@ def login():
     # initialize InstagramAPI and login
     api = InstagramAPI(insta_id, insta_pswd)
     api.login()
-
+    
     user_id = api.username_id
 
     # List followers and followings
@@ -107,6 +94,20 @@ def login():
                             numfollowings=num_followings,
                             followers=nonfollowers,
                             followings=nonfollowings)
+
+
+@app.errorhandler(400)
+def not_found(error):
+    """Handle 400 error"""
+    print(f'400 error: {error}')
+    return render_template('index.html')
+
+
+@app.errorhandler(500)
+def handle_500(error):
+    """To do:Handle 500 error - e.g. when error starts with 500 handle logon error"""
+    print(f'500 error: {error}')
+    return render_template('index.html')
 
 
 if __name__ == '__main__':
