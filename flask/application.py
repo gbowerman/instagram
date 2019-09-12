@@ -40,7 +40,7 @@ def list_to_pkdict(personlist):
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html', error_message="")
 
 
 @app.route('/login', methods=['POST', 'GET'])
@@ -100,14 +100,14 @@ def login():
 def not_found(error):
     """Handle 400 error"""
     print(f'400 error: {error}')
-    return render_template('index.html')
+    return render_template('index.html', error_message="Error: Bad request. Check username and password.")
 
 
 @app.errorhandler(500)
 def handle_500(error):
     """To do:Handle 500 error - e.g. when error starts with 500 handle logon error"""
     print(f'500 error: {error}')
-    return render_template('index.html')
+    return render_template('index.html', error_message="Server error. Check username and password.")
 
 
 if __name__ == '__main__':
